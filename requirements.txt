@@ -1,0 +1,8 @@
+jupyterlab
+pyarrow
+pandas
+ipynb-py-convert
+scikit-learn
+matplotlib
+tensorflow
+
