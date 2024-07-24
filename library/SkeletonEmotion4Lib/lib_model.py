@@ -136,8 +136,23 @@ def create_model_encdec(load_weights=True,file_of_weight='',ncod=15):
         model=load_model_from_extern(model,file_of_weight);
     
     return model;
+
+def create_sequential_cls(ncod):
+    '''
+    '''    
+    func_act=tf.keras.layers.LeakyReLU(alpha=0.01);
     
-def create_model(load_weights=True,file_of_weight='',file_of_weight_full=True,ncod=15):
+    # modelo nuevo
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(6*ncod+1, activation=func_act),
+        tf.keras.layers.Dense(2*ncod+1, activation=func_act),
+        tf.keras.layers.Dense(ncod, activation=func_act),
+        tf.keras.layers.Dense(4, activation='softmax')
+    ])
+    
+    return model;
+
+def create_model_enccls(load_weights=True,file_of_weight='',file_of_weight_full=True,ncod=15):
     '''
     Retorna un modelo para la clasificación.
     Adicionalmente, si el archivo `file_of_weight` existe los pesos son cargados.
@@ -156,21 +171,49 @@ def create_model(load_weights=True,file_of_weight='',file_of_weight_full=True,nc
         encoder = create_model_encoder( load_weights=False, file_of_weight=file_of_weight, ncod=ncod);
     
     encoder.trainable=False;
+    
+    seq_cls=create_sequential_cls(ncod);
         
     model = tf.keras.Sequential([
         tf.keras.layers.Input(shape=(51,) ),
         encoder,
-        tf.keras.layers.Dense(6*ncod+1, activation=func_act),
-        tf.keras.layers.Dense(2*ncod+1, activation=func_act),
-        tf.keras.layers.Dense(ncod, activation=func_act),
-        tf.keras.layers.Dense(4, activation='softmax')
+        seq_cls
     ])
     
     
     if load_weights==True:
-        model=load_model_from_intern(model,'model_cls.h5');
+        model=load_model_from_intern(model,'model_enccls.h5');
     
     if len(file_of_weight)!=0 and file_of_weight_full==True:
+        model=load_model_from_extern(model,file_of_weight);
+    
+    return model;
+
+def create_model_onlycls(load_weights=True,file_of_weight='',ncod=15):
+    '''
+    Retorna un modelo para la clasificación.
+    Adicionalmente, si el archivo `file_of_weight` existe los pesos son cargados.
+    
+    :param file_of_weight: Archivo donde se encuentran los pesos.
+    :type file_of_weight: str
+    :return: Retorna un modelo de red neuronal
+    :rtype: tensorflow.python.keras.engine.sequential.Sequential
+    '''
+    func_act=tf.keras.layers.LeakyReLU(alpha=0.01);
+        
+
+    seq_cls=create_sequential_cls(ncod);
+        
+    model = tf.keras.Sequential([
+        tf.keras.layers.Input(shape=(51,) ),
+        seq_cls
+    ])
+    
+    
+    if load_weights==True:
+        model=load_model_from_intern(model,'model_onlycls.h5');
+    
+    if len(file_of_weight)!=0:
         model=load_model_from_extern(model,file_of_weight);
     
     return model;
