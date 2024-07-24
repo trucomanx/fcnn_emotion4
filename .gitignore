@@ -5,4 +5,4 @@
 /library/BodyEmotion4Lib/__pycache__
 /create/runs
 /create/.ipynb_checkpoints
-
+/library/SkeletonEmotion4Lib/__pycache__/*.pyc

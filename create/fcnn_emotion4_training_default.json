@@ -1,0 +1,10 @@
+{
+    "dataset_train_base_dir" : "/media/fernando/Expansion/DATASET/TESE/BER/BER2024/BER2024-SKELETON",
+    "dataset_train_labels_file" : "train.csv",
+    "dataset_test_base_dir" : "/media/fernando/Expansion/DATASET/TESE/BER/BER2024/BER2024-SKELETON",
+    "dataset_test_labels_file" : "test.csv",
+    "dataset_name" : "ber2024-skel",
+    "batch_size" : 1024,
+    "epochs" : 2000,
+    "output_base_dir" : "/media/fernando/Expansion/OUTPUTS/DOCTORADO2/fcnn_emotion4"
+}

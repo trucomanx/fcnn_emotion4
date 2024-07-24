@@ -2,6 +2,7 @@
 
 import os
 import SkeletonEmotion4Lib.lib_model as mpp
+import SkeletonEmotion4Lib.lib_tools as mpt
 
 class Emotion4Classifier:
     """Class to classify 4 body languages.
@@ -22,11 +23,12 @@ class Emotion4Classifier:
         """
         
         if len(file_of_weight)>0:
-            self.model = mpp.create_model_encoder(  load_weights=False,
-                                                    file_of_weight=file_of_weight);
+            self.model = mpp.create_model(  load_weights=False,
+                                            file_of_weight=file_of_weight,
+                                            file_of_weight_full=True);
         else:
-            self.model = mpp.create_model_encode(   load_weights=True,
-                                                    file_of_weight='');
+            self.model = mpp.create_model(   load_weights=True,
+                                             file_of_weight='');
 
     def from_skel_npvector(self,npvector):
         """Classify a skeleton data from a numpy vector object.
@@ -37,7 +39,8 @@ class Emotion4Classifier:
         Returns:
             int: The class of image.
         """
-        return mpp.evaluate_model_from_npvector(self.model,npvector);
+        return mpp.evaluate_model_from_npvector(self.model,
+                                                mpt.vector_normalize_coordinates(npvector));
 
 
     def target_labels(self):

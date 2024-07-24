@@ -9,38 +9,38 @@ import matplotlib.pyplot as plt
 import tensorflow.keras.backend as K
 
 
-def verify_model(model,load_weights, file_of_weight,model_fname):
-    if load_weights==True:
-        path_actual = os.path.realpath(__file__);
-        directorio_actual = os.path.dirname(path_actual);
-        path_of_model=os.path.join(directorio_actual,'models',model_fname);
-        
-        if os.path.exists(path_of_model):
-            print("Loading the weights in:",path_of_model);
-            try:
-                model.load_weights(path_of_model);
-                print("Loaded the weights in:",path_of_model);
-                
-            except Exception:
-                print("Error loading the weights in:",path_of_model);
-                exit();
-        else:
-            print("Error loading, file no found:",path_of_model);
-            exit();
+def load_model_from_intern(model,model_fname):
+    path_actual = os.path.realpath(__file__);
+    directorio_actual = os.path.dirname(path_actual);
+    path_of_model=os.path.join(directorio_actual,'models',model_fname);
     
-    if len(file_of_weight)!=0:
-        print("Loading the weights in:",file_of_weight);
-        if os.path.exists(file_of_weight):
-            #
-            try:
-                obj=model.load_weights(file_of_weight);
-                print("Loaded the weights in:",file_of_weight);
-            except Exception:
-                print("Error loading the weights in:",file_of_weight);
-                exit();
-        else:
-            print("Error loading, file no found:",file_of_weight);
+    if os.path.exists(path_of_model):
+        print("Loading the weights in:",path_of_model);
+        try:
+            model.load_weights(path_of_model);
+            print("Loaded the weights in:",path_of_model);
+            
+        except Exception:
+            print("Error loading the weights in:",path_of_model);
             exit();
+    else:
+        print("Error loading, file no found:",path_of_model);
+        exit();
+    return model;
+
+def load_model_from_extern(model,file_of_weight):
+    print("Loading the weights in:",file_of_weight);
+    if os.path.exists(file_of_weight):
+        #
+        try:
+            obj=model.load_weights(file_of_weight);
+            print("Loaded the weights in:",file_of_weight);
+        except Exception:
+            print("Error loading the weights in:",file_of_weight);
+            exit();
+    else:
+        print("Error loading, file no found:",file_of_weight);
+        exit();
     
     return model;
 
@@ -55,7 +55,7 @@ def create_model_encoder(load_weights=True,file_of_weight='',ncod=15):
     :rtype: tensorflow.python.keras.engine.sequential.Sequential
     '''
     
-    func_act=tf.keras.layers.LeakyReLU(negative_slope=0.01);
+    func_act=tf.keras.layers.LeakyReLU(alpha=0.01);
 
 
     # modelo nuevo
@@ -67,7 +67,11 @@ def create_model_encoder(load_weights=True,file_of_weight='',ncod=15):
         tf.keras.layers.Dense(ncod, activation='softmax')
     ])
     
-    model=verify_model(model,load_weights, file_of_weight,'model_encoder.h5');
+    if load_weights==True:
+        model=load_model_from_intern(model,'model_encoder.h5');
+    
+    if len(file_of_weight)!=0:
+        model=load_model_from_extern(model,file_of_weight);
     
     return model;
 
@@ -83,7 +87,7 @@ def create_model_decoder(load_weights=True,file_of_weight='',ncod=15):
     :rtype: tensorflow.python.keras.engine.sequential.Sequential
     '''
     
-    func_act=tf.keras.layers.LeakyReLU(negative_slope=0.01);
+    func_act=tf.keras.layers.LeakyReLU(alpha=0.01);
 
 
     # modelo nuevo
@@ -95,11 +99,15 @@ def create_model_decoder(load_weights=True,file_of_weight='',ncod=15):
         tf.keras.layers.Dense(51, activation=func_act)
     ])
     
-    model=verify_model(model,load_weights, file_of_weight,'model_decoder.h5');
+    if load_weights==True:
+        model=load_model_from_intern(model,'model_decoder.h5');
+    
+    if len(file_of_weight)!=0:
+        model=load_model_from_extern(model,file_of_weight);
     
     return model;
 
-def create_model_full(load_weights=True,file_of_weight='',ncod=15):
+def create_model_encdec(load_weights=True,file_of_weight='',ncod=15):
     '''
     Retorna un modelo para la clasificación.
     Adicionalmente, si el archivo `file_of_weight` existe los pesos son cargados.
@@ -119,11 +127,53 @@ def create_model_full(load_weights=True,file_of_weight='',ncod=15):
         tf.keras.layers.Input(shape=(51,) ),
         encoder,
         decoder
+    ]);
+    
+    if load_weights==True:
+        model=load_model_from_intern(model,'model_encdec.h5');
+    
+    if len(file_of_weight)!=0:
+        model=load_model_from_extern(model,file_of_weight);
+    
+    return model;
+    
+def create_model(load_weights=True,file_of_weight='',file_of_weight_full=True,ncod=15):
+    '''
+    Retorna un modelo para la clasificación.
+    Adicionalmente, si el archivo `file_of_weight` existe los pesos son cargados.
+    
+    :param file_of_weight: Archivo donde se encuentran los pesos.
+    :type file_of_weight: str
+    :return: Retorna un modelo de red neuronal
+    :rtype: tensorflow.python.keras.engine.sequential.Sequential
+    '''
+    func_act=tf.keras.layers.LeakyReLU(alpha=0.01);
+        
+    # modelo nuevo
+    if len(file_of_weight)!=0 and file_of_weight_full==True:
+        encoder = create_model_encoder( load_weights=False, file_of_weight='', ncod=ncod);
+    else:
+        encoder = create_model_encoder( load_weights=False, file_of_weight=file_of_weight, ncod=ncod);
+    
+    encoder.trainable=False;
+        
+    model = tf.keras.Sequential([
+        tf.keras.layers.Input(shape=(51,) ),
+        encoder,
+        tf.keras.layers.Dense(6*ncod+1, activation=func_act),
+        tf.keras.layers.Dense(2*ncod+1, activation=func_act),
+        tf.keras.layers.Dense(ncod, activation=func_act),
+        tf.keras.layers.Dense(4, activation='softmax')
     ])
     
-    model=verify_model(model,load_weights, file_of_weight,'model_full.h5');
     
-    return model
+    if load_weights==True:
+        model=load_model_from_intern(model,'model_cls.h5');
+    
+    if len(file_of_weight)!=0 and file_of_weight_full==True:
+        model=load_model_from_extern(model,file_of_weight);
+    
+    return model;
 
 def evaluate_model_from_npvector(model, npvector):
     '''
@@ -137,7 +187,7 @@ def evaluate_model_from_npvector(model, npvector):
     :rtype: int
     '''
 
-    res=model.predict( npvector.reshape((-1,npvector.size,)), verbose=0);
+    res=model.predict( npvector.reshape((-1,npvector.size)), verbose=0);
     
     return np.argmax(res);
 
@@ -159,17 +209,17 @@ def save_model_history(hist, fpath,show=True, labels=['accuracy','loss']):
     plt.subplot(1,2,1)
     plt.plot(rango_epocas,    acc,label=labels[0]+' training')
     plt.plot(rango_epocas,val_acc,label=labels[0]+' validation')
-    plt.legend(loc='lower right')
+    plt.legend(loc='upper right')
     #plt.title('Analysis accuracy')
-    plt.ylabel('Accuracy')
+    plt.ylabel(labels[0])
     plt.xlabel('Epochs')
     #
     plt.subplot(1,2,2)
     plt.plot(rango_epocas,    loss,label=labels[1]+' training')
     plt.plot(rango_epocas,val_loss,label=labels[1]+' validation')
-    plt.legend(loc='lower right')
+    plt.legend(loc='upper right')
     #plt.title('Analysis loss')
-    plt.ylabel('Loss')
+    plt.ylabel(labels[1])
     plt.xlabel('Epochs')
     #
     plt.savefig(fpath+'.plot.png')
