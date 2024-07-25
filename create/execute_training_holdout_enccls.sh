@@ -19,7 +19,9 @@ InTsF='test.csv'
 
 ipynb-py-convert training_holdout_enccls.ipynb training_holdout_enccls.py
 
-python3 training_holdout_enccls.py  --epochs 40 \
+python3 training_holdout_enccls.py  --epochs  10000 \
+                                    --patience 2000 \
+                                    --seed 0 \
                                     --batch-size 2048 \
                                     --dataset-train-dir $InTrD \
                                     --dataset-train-file $InTrF \

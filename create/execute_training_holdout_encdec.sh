@@ -14,15 +14,20 @@ InTrF='train.csv'
 InTsD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
 InTsF='test.csv'
 
+WFile=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_1/ber2024-skel/training_validation_holdout/encdec_ncod20_1/model_encdec.h5'
+
 
 ################################################################################
 
-ipynb-py-convert training_holdout_onlycls.ipynb training_holdout_onlycls.py
+ipynb-py-convert training_holdout_encdec.ipynb training_holdout_encdec.py
 
-python3 training_holdout_onlycls.py --epochs  10000 \
-                                    --patience 2000 \
+python3 training_holdout_encdec.py  --epochs  10000 \
+                                    --patience 1000 \
                                     --seed 0 \
                                     --batch-size 2048 \
+                                    --subdir encdec_ncod20_2 \
+                                    --ncod 20 \
+                                    --weights-init $WFile \
                                     --dataset-train-dir $InTrD \
                                     --dataset-train-file $InTrF \
                                     --dataset-test-dir $InTsD \
@@ -31,5 +36,5 @@ python3 training_holdout_onlycls.py --epochs  10000 \
                                     --output-dir $OutDir
 
 
-rm -f training_holdout_onlycls.py
+rm -f training_holdout_encdec.py
 
