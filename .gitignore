@@ -6,3 +6,4 @@
 /create/runs
 /create/.ipynb_checkpoints
 /library/SkeletonEmotion4Lib/__pycache__/*.pyc
+/create/training_holdout_onlycls.py

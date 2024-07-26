@@ -20,7 +20,7 @@ WFile=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_1/ber2024-skel/training_validat
 
 ipynb-py-convert training_holdout_enccls.ipynb training_holdout_enccls.py
 
-python3 training_holdout_enccls.py  --epochs  10 \
+python3 training_holdout_enccls.py  --epochs  10000 \
                                     --patience 2000 \
                                     --seed 0 \
                                     --batch-size 2048 \

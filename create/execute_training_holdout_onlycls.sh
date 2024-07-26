@@ -22,6 +22,7 @@ ipynb-py-convert training_holdout_onlycls.ipynb training_holdout_onlycls.py
 python3 training_holdout_onlycls.py --epochs  10000 \
                                     --patience 2000 \
                                     --seed 0 \
+                                    --ncod 18\
                                     --batch-size 2048 \
                                     --dataset-train-dir $InTrD \
                                     --dataset-train-file $InTrF \
