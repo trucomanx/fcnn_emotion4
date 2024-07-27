@@ -14,7 +14,7 @@ InTrF='train.csv'
 InTsD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
 InTsF='test.csv'
 
-WFile=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_1/ber2024-skel/training_validation_holdout/encdec_ncod20_1/model_encdec.h5'
+WFile=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_1/ber2024-skel/training_validation_holdout_encdec/encdec_ncod20_1/model_encdec.h5'
 
 
 ################################################################################
