@@ -17,6 +17,8 @@ info_list=[ "mean_val_categorical_accuracy",
 
 erro_bar=[("mean_val_categorical_accuracy","std_val_categorical_accuracy")];
 
+p_matrix="val_categorical_accuracy";
+
 sep=",";
 
 image_ext=".eps";
