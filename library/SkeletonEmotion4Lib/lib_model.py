@@ -211,7 +211,7 @@ def create_model_onlycls(load_weights=True,file_of_weight='',ncod=15):
     
     
     if load_weights==True:
-        model=load_model_from_intern(model,'model_onlycls.h5');
+        model=load_model_from_intern(model,'model_onlycls_ncod'+str(ncod)+'.h5');
     
     if len(file_of_weight)!=0:
         model=load_model_from_extern(model,file_of_weight);

@@ -13,7 +13,8 @@ info_list=[ "mean_val_categorical_accuracy",
             "std_val_categorical_accuracy",
             "mean_val_loss",
             "mean_train_categorical_accuracy",
-            "mean_train_loss"];
+            "mean_train_loss",
+            "number_of_parameters"];
 
 erro_bar=[("mean_val_categorical_accuracy","std_val_categorical_accuracy")];
 
@@ -36,7 +37,7 @@ DName='ber2024-skel'
 
 
 if [ "$DName" = "ber2024-skel" ]; then
-    InTrD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-BODY'
+    InTrD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
     InTrF='train.csv'
 fi
 
@@ -49,7 +50,8 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/cross-valid
 
 ipynb-py-convert kfold_validation_onlycls.ipynb kfold_validation_onlycls.py
 
-for ncod in 18 20 22; do
+# 15 18 20 22
+for ncod in 25 11 29; do
     echo " "
     python3 kfold_validation_onlycls.py --epochs  10000 \
                                         --patience 2000 \

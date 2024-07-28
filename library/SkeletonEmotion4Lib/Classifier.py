@@ -15,7 +15,7 @@ class Emotion4Classifier:
     Atributos:
         modelo: Model returned by tensorflow.
     """
-    def __init__(self,file_of_weight=''):
+    def __init__(self,file_of_weight='',ncod=20):
         """Inicializer of class Emotion4Classifier.
         
         Args:
@@ -23,18 +23,18 @@ class Emotion4Classifier:
         """
         
         if len(file_of_weight)>0:
-            self.model = mpp.create_model(  load_weights=False,
-                                            file_of_weight=file_of_weight,
-                                            file_of_weight_full=True);
+            self.model = mpp.create_model_onlycls(  load_weights=False,
+                                                    file_of_weight=file_of_weight);
         else:
-            self.model = mpp.create_model(   load_weights=True,
-                                             file_of_weight='');
+            self.model = mpp.create_model_onlycls(  load_weights=True,
+                                                    file_of_weight='',
+                                                    ncod=ncod);
 
     def from_skel_npvector(self,npvector):
-        """Classify a skeleton data from a numpy vector object.
+        """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
         
         Args:
-            npvector: Numpy vector.
+            npvector: Numpy vector with 51 elements ...,x_i,y_i,p_i...
         
         Returns:
             int: The class of image.
