@@ -229,8 +229,14 @@ def evaluate_model_from_npvector(model, npvector):
     :return: Retorna la classificación.
     :rtype: int
     '''
-
-    res=model.predict( npvector.reshape((-1,npvector.size)), verbose=0);
+    #vec = npvector.reshape(1,npvector.size);
+    vec = np.expand_dims(npvector, axis=0);
+    
+    # Verifique o tipo de dado e converta se necessário
+    if vec.dtype != np.float32:
+        vec = vec.astype(np.float32)
+    
+    res=model.predict( vec, verbose=0);
     
     return np.argmax(res);
 

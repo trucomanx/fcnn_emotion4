@@ -1,0 +1,9 @@
+{
+    "dataset_base_dir" : "/media/fernando/Expansion/DATASET/TESE/BER/BER2024/BER2024-SKELETON",
+    "dataset_labels_file" : "test.csv",
+    "dataset_name" : "ber2024-skel",
+    "model_file" : "/media/fernando/Expansion/OUTPUTS/DOCTORADO2/fcnn_emotion4/ber2024-skel/training_validation_holdout/onlycls_ncod20/model_onlycls_ncod20.h5",
+    "times" : 10,
+    "ncod" : 20, 
+    "output_base_dir" : "/media/fernando/Expansion/OUTPUTS/DOCTORADO2/fcnn_emotion4_1"
+}
