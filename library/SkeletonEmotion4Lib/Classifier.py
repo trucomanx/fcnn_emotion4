@@ -43,6 +43,17 @@ class Emotion4Classifier:
         return mpp.evaluate_model_from_npvector(self.model,
                                                 mpt.vector_normalize_coordinates(npvector));
 
+    def predict_vec(self,npvector):
+        """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
+        
+        Args:
+            npvector: Numpy vector with 51 elements ...,x_i,y_i,p_i...
+        
+        Returns:
+            int: The class of image.
+        """
+        return mpp.predict_model_from_npvector( self.model,
+                                                mpt.vector_normalize_coordinates(npvector));
 
     def target_labels(self):
         """Returns the categories of classifier.

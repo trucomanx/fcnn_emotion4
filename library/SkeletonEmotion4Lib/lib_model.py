@@ -240,6 +240,28 @@ def evaluate_model_from_npvector(model, npvector):
     
     return np.argmax(res);
 
+def predict_model_from_npvector(model, npvector):
+    '''
+    Evalua la red neuronal descrita en `modelo`, la entrada es leida desde um numpy vector.
+    
+    :param model: Modelo de la red neuronal.
+    :type model: tensorflow.python.keras.engine.sequential.Sequential
+    :param npvector: Vector a testar.
+    :type npvector: Numpy array
+    :return: Retorna la classificación.
+    :rtype: int
+    '''
+    #vec = npvector.reshape(1,npvector.size);
+    vec = np.expand_dims(npvector, axis=0);
+    
+    # Verifique o tipo de dado e converta se necessário
+    if vec.dtype != np.float32:
+        vec = vec.astype(np.float32)
+    
+    res=model.predict( vec, verbose=0);
+    
+    return res;    
+
 def save_model_history(hist, fpath,show=True, labels=['accuracy','loss']):
     ''''This function saves the history returned by model.fit to a tab-
     delimited file, where model is a keras model'''
