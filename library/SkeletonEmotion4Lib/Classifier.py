@@ -24,7 +24,8 @@ class Emotion4Classifier:
         
         if len(file_of_weight)>0:
             self.model = mpp.create_model_onlycls(  load_weights=False,
-                                                    file_of_weight=file_of_weight);
+                                                    file_of_weight=file_of_weight,
+                                                    ncod=ncod);
         else:
             self.model = mpp.create_model_onlycls(  load_weights=True,
                                                     file_of_weight='',
