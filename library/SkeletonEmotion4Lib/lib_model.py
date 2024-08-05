@@ -260,7 +260,7 @@ def predict_model_from_npvector(model, npvector):
     
     res=model.predict( vec, verbose=0);
     
-    return res;    
+    return res[0];    
 
 def save_model_history(hist, fpath,show=True, labels=['accuracy','loss']):
     ''''This function saves the history returned by model.fit to a tab-
