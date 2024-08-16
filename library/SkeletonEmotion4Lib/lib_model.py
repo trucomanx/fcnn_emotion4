@@ -15,6 +15,7 @@ def load_model_from_intern(model,model_fname):
     path_of_model=os.path.join(directorio_actual,'models',model_fname);
     
     if os.path.exists(path_of_model):
+        print('')
         print("Loading the weights in:",path_of_model);
         try:
             model.load_weights(path_of_model);
@@ -29,6 +30,7 @@ def load_model_from_intern(model,model_fname):
     return model;
 
 def load_model_from_extern(model,file_of_weight):
+    print('')
     print("Loading the weights in:",file_of_weight);
     if os.path.exists(file_of_weight):
         #
@@ -189,6 +191,10 @@ def create_model_enccls(load_weights=True,file_of_weight='',file_of_weight_full=
     
     return model;
 
+################################################################################
+################################################################################
+################################################################################
+
 def create_model_onlycls(load_weights=True,file_of_weight='',ncod=15):
     '''
     Retorna un modelo para la clasificación.
@@ -260,7 +266,11 @@ def predict_model_from_npvector(model, npvector):
     
     res=model.predict( vec, verbose=0);
     
-    return res[0];    
+    return res[0];
+
+################################################################################
+################################################################################
+################################################################################
 
 def save_model_history(hist, fpath,show=True, labels=['accuracy','loss']):
     ''''This function saves the history returned by model.fit to a tab-
