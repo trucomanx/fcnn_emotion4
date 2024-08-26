@@ -49,6 +49,18 @@ class Emotion4Classifier:
         return mpp.evaluate_model_from_npvector(self.model,
                                                 mpt.vector_normalize_coordinates(npvector));
 
+    def from_skel_npvector_list(self,npvector_list):
+        """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
+        
+        Args:
+            npvector_list: List of Numpy vector with 51 elements ...,x_i,y_i,p_i...
+        
+        Returns:
+            numpy.array: The class of image.
+        """
+        return mpp.evaluate_model_from_npvector_list(   self.model,
+                                                        [mpt.vector_normalize_coordinates(npvector) for npvector in npvector_list]);
+
     def predict_vec(self,npvector):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
         
@@ -60,6 +72,18 @@ class Emotion4Classifier:
         """
         return mpp.predict_model_from_npvector( self.model,
                                                 mpt.vector_normalize_coordinates(npvector));
+
+    def predict_vec_list(self,npvector_list):
+        """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
+        
+        Args:
+            npvector_list: List of Numpy vector with 51 elements ...,x_i,y_i,p_i...
+        
+        Returns:
+            numpy.array: The class of image.
+        """
+        return mpp.predict_model_from_npvector_list(self.model,
+                                                    [mpt.vector_normalize_coordinates(npvector) for npvector in npvector_list]);
     
     def predict_minus_vec(self,npvector):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
@@ -72,6 +96,18 @@ class Emotion4Classifier:
         """
         return mpp.predict_model_from_npvector( self.model_minus,
                                                 mpt.vector_normalize_coordinates(npvector));
+
+    def predict_minus_vec_list(self,npvector_list):
+        """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
+        
+        Args:
+            npvector: list of Numpy vector with 51 elements ...,x_i,y_i,p_i...
+        
+        Returns:
+            numpy.array: array of numpy.array.
+        """
+        return mpp.predict_model_from_npvector_list(self.model_minus,
+                                                    [mpt.vector_normalize_coordinates(npvector) for npvector in npvector_list]);
 
     def target_labels(self):
         """Returns the categories of classifier.

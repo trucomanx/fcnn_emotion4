@@ -246,6 +246,27 @@ def evaluate_model_from_npvector(model, npvector):
     
     return np.argmax(res);
 
+def evaluate_model_from_npvector_list(model, npvector_list):
+    '''
+    Evalua la red neuronal descrita en `modelo`, la entrada es leida desde um numpy vector.
+    
+    :param model: Modelo de la red neuronal.
+    :type model: tensorflow.python.keras.engine.sequential.Sequential
+    :param npvector_list: List of Vector a testar.
+    :type npvector_list: List of Numpy array
+    :return: Retorna la classificación.
+    :rtype: int
+    '''
+    matrix = np.stack(npvector_list);
+    
+    # Verifique o tipo de dado e converta se necessário
+    if matrix.dtype != np.float32:
+        matrix = matrix.astype(np.float32)
+    
+    res=model.predict( matrix, verbose=0);
+    
+    return np.argmax(res,axis=1);
+
 def predict_model_from_npvector(model, npvector):
     '''
     Evalua la red neuronal descrita en `modelo`, la entrada es leida desde um numpy vector.
@@ -267,6 +288,28 @@ def predict_model_from_npvector(model, npvector):
     res=model.predict( vec, verbose=0);
     
     return res[0];
+
+def predict_model_from_npvector_list(model, npvector_list):
+    '''
+    Evalua la red neuronal descrita en `modelo`, la entrada es leida desde um numpy vector.
+    
+    :param model: Modelo de la red neuronal.
+    :type model: tensorflow.python.keras.engine.sequential.Sequential
+    :param npvector_list: Vector a testar.
+    :type npvector_list: List of Numpy array
+    :return: Retorna la classificación.
+    :rtype: int
+    '''
+    
+    matrix = np.stack(npvector_list);
+    
+    # Verifique o tipo de dado e converta se necessário
+    if matrix.dtype != np.float32:
+        matrix = matrix.astype(np.float32)
+    
+    res=model.predict( matrix, verbose=0);
+    
+    return res;
 
 ################################################################################
 ################################################################################
