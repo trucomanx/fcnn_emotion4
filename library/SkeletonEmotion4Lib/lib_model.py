@@ -257,13 +257,8 @@ def evaluate_model_from_npvector_list(model, npvector_list):
     :return: Retorna la classificación.
     :rtype: int
     '''
-    matrix = np.stack(npvector_list);
-    
-    # Verifique o tipo de dado e converta se necessário
-    if matrix.dtype != np.float32:
-        matrix = matrix.astype(np.float32)
-    
-    res=model.predict( matrix, verbose=0);
+        
+    res=predict_model_from_npvector_list(model, npvector_list);
     
     return np.argmax(res,axis=1);
 
@@ -301,13 +296,26 @@ def predict_model_from_npvector_list(model, npvector_list):
     :rtype: int
     '''
     
-    matrix = np.stack(npvector_list);
+    # Lista para armazenar os índices dos elementos None
+    none_indices = [i for i, vec in enumerate(npvector_list) if vec is None]
+
+    # Determinar o tamanho dos vetores (assume que pelo menos um vetor válido existe)
+    vector_size = next(vec.shape[0] for vec in npvector_list if vec is not None)
+
+    # Substituir None por vetores de zeros
+    new_list = [vec if vec is not None else np.zeros(vector_size) for vec in npvector_list]
+    
+    
+    matrix = np.stack(new_list);
     
     # Verifique o tipo de dado e converta se necessário
     if matrix.dtype != np.float32:
         matrix = matrix.astype(np.float32)
     
     res=model.predict( matrix, verbose=0);
+    
+    # zero lines with Nones
+    res[none_indices,:]=0.0;
     
     return res;
 
