@@ -46,8 +46,11 @@ class Emotion4Classifier:
         Returns:
             int: The class of image.
         """
-        return mpp.evaluate_model_from_npvector(self.model,
-                                                mpt.vector_normalize_coordinates(npvector));
+        if npvector is None:
+            return None;
+        else:
+            return mpp.evaluate_model_from_npvector(self.model,
+                                                    mpt.vector_normalize_coordinates(npvector));
 
     def from_skel_npvector_list(self,npvector_list):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
@@ -58,8 +61,9 @@ class Emotion4Classifier:
         Returns:
             numpy.array: The class of image.
         """
-        return mpp.evaluate_model_from_npvector_list(   self.model,
-                                                        [mpt.vector_normalize_coordinates(npvector) for npvector in npvector_list]);
+        lista=[mpt.vector_normalize_coordinates(npvector) if npvector is not None else None for npvector in npvector_list];
+        
+        return mpp.evaluate_model_from_npvector_list(   self.model,lista);
 
     def predict_vec(self,npvector):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
@@ -70,8 +74,11 @@ class Emotion4Classifier:
         Returns:
             numpy.array: The class of image.
         """
-        return mpp.predict_model_from_npvector( self.model,
-                                                mpt.vector_normalize_coordinates(npvector));
+        if npvector is None:
+            return None;
+        else:
+            return mpp.predict_model_from_npvector( self.model,
+                                                    mpt.vector_normalize_coordinates(npvector));
 
     def predict_vec_list(self,npvector_list):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
@@ -82,8 +89,8 @@ class Emotion4Classifier:
         Returns:
             numpy.array: The class of image.
         """
-        return mpp.predict_model_from_npvector_list(self.model,
-                                                    [mpt.vector_normalize_coordinates(npvector) for npvector in npvector_list]);
+        lista=[mpt.vector_normalize_coordinates(npvector) if npvector is not None else None for npvector in npvector_list];
+        return mpp.predict_model_from_npvector_list(self.model,lista);
     
     def predict_minus_vec(self,npvector):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
@@ -94,8 +101,11 @@ class Emotion4Classifier:
         Returns:
             numpy.array: The class of image.
         """
-        return mpp.predict_model_from_npvector( self.model_minus,
-                                                mpt.vector_normalize_coordinates(npvector));
+        if npvector is None:
+            return None;
+        else:
+            return mpp.predict_model_from_npvector( self.model_minus,
+                                                    mpt.vector_normalize_coordinates(npvector));
 
     def predict_minus_vec_list(self,npvector_list):
         """Classify a skeleton data from a numpy vector object with 51 elements ...,x_i,y_i,p_i...
@@ -106,8 +116,8 @@ class Emotion4Classifier:
         Returns:
             numpy.array: array of numpy.array.
         """
-        return mpp.predict_model_from_npvector_list(self.model_minus,
-                                                    [mpt.vector_normalize_coordinates(npvector) for npvector in npvector_list]);
+        lista=[mpt.vector_normalize_coordinates(npvector) if npvector is not None else None for npvector in npvector_list];
+        return mpp.predict_model_from_npvector_list(self.model_minus,lista);
 
     def target_labels(self):
         """Returns the categories of classifier.

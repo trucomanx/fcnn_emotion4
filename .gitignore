@@ -8,3 +8,5 @@
 /library/SkeletonEmotion4Lib/__pycache__/*.pyc
 /create/training_holdout_onlycls.py
 /create/kfold_validation_onlycls.py
+/library/SkeletonEmotion4Lib.egg-info
+/library/dist
