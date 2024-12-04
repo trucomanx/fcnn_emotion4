@@ -31,14 +31,14 @@ BaseDir='/media/fernando/Expansion'
 # 
 #BaseDir='/media/fernando/B0EA304AEA300EDA/Dados/Fernando'
 
-OutDir=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_1'
+OutDir=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_v2'
 
 DName='ber2024-skel'
 
 InTrD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
-InTrF='train.csv'
+InTrF='train_refface.csv'
 InTsD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
-InTsF='test.csv'
+InTsF='test_refface.csv'
 
 ################################################################################
 
