@@ -1,0 +1,10 @@
+{
+    "dataset_base_dir" : "/media/fernando/Expansion/DATASET/TESE/BER/BER2024/BER2024-SKELETON",
+    "dataset_labels_file" : "train.csv",
+    "dataset_name" : "ber2024-skel",
+    "kfold" : 5,
+    "batch_size" : 1024,
+    "epochs" : 20,
+    "enable_stratified": true,
+    "output_base_dir" : "/media/fernando/Expansion/OUTPUTS/DOCTORADO2/fcnn_emotion4_1"
+}
