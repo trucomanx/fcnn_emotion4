@@ -10,3 +10,4 @@
 /create/kfold_validation_onlycls.py
 /library/SkeletonEmotion4Lib.egg-info
 /library/dist
+/create_full/kfold_validation_onlycls.py
