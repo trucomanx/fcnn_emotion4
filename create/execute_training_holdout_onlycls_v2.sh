@@ -9,7 +9,11 @@ model_list=["onlycls_ncod15",
             "onlycls_ncod20",
             "onlycls_ncod22",
             "onlycls_ncod25",
-            "onlycls_ncod30"
+            "onlycls_ncod29",
+            "onlycls_ncod33",
+            "onlycls_ncod37",
+            "onlycls_ncod41",
+            "onlycls_ncod45"
             ];
 
 info_list=[ "train_categorical_accuracy",
@@ -27,7 +31,7 @@ image_ext=".eps";
 '
 
 # HD
-BaseDir='/media/fernando/Expansion'
+BaseDir='/media/maquina02/HD/Dados/Fernando'
 # 
 #BaseDir='/media/fernando/B0EA304AEA300EDA/Dados/Fernando'
 
@@ -49,7 +53,8 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/training_va
 
 ipynb-py-convert training_holdout_onlycls.ipynb training_holdout_onlycls.py
 
-for ncod in 11 15 18 20 22 25 29; do
+# 11 15 18 20 22 25 29 33 37 41 45
+for ncod in 11 15 18 20 22 25 29 33 37 41 45 49 53; do
     echo " "
     python3 training_holdout_onlycls.py --epochs  10000 \
                                         --patience 2000 \

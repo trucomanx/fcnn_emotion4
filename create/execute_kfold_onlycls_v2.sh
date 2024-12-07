@@ -4,9 +4,16 @@ PyCommand='#!/usr/bin/python3
 
 json_filename="kfold_data_results.json"
 
-model_list=["onlycls_ncod18",
+model_list=["onlycls_ncod15",
+            "onlycls_ncod18",
             "onlycls_ncod20",
-            "onlycls_ncod22"
+            "onlycls_ncod22",
+            "onlycls_ncod25",
+            "onlycls_ncod29",
+            "onlycls_ncod33",
+            "onlycls_ncod37",
+            "onlycls_ncod41",
+            "onlycls_ncod45"
             ];
 
 info_list=[ "mean_val_categorical_accuracy",
@@ -50,8 +57,8 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/cross-valid
 
 ipynb-py-convert kfold_validation_onlycls.ipynb kfold_validation_onlycls.py
 
-# 
-for ncod in 11 15 18 20 22 25 29; do
+# 11 15 18 20 22 25 29 33 37 41 45
+for ncod in 49 53; do
     echo " "
     python3 kfold_validation_onlycls.py --epochs  10000 \
                                         --patience 2000 \
