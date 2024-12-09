@@ -53,8 +53,8 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/cross-valid
 
 ipynb-py-convert kfold_validation_onlycls.ipynb kfold_validation_onlycls.py
 
-# 15 18 20 22 25 29
-for ncod in 33 37 41 45; do
+# 15 18 20 22 25 29 33 37 41 45
+for ncod in 49 53; do
     echo " "
     python3 kfold_validation_onlycls.py --epochs  10000 \
                                         --patience 2000 \

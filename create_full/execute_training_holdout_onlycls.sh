@@ -48,7 +48,7 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/training_va
 
 ipynb-py-convert training_holdout_onlycls.ipynb training_holdout_onlycls.py
 
-for ncod in 15 18 20 22 25; do
+for ncod in 15 18 20 22 25 29 33 37 41 45 49 53; do
     echo " "
     python3 training_holdout_onlycls.py --epochs  10000 \
                                         --patience 2000 \
