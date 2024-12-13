@@ -26,7 +26,7 @@ image_ext=".eps";
 '
 
 # HD
-BaseDir='/media/maquina02/HD/Dados/Fernando'
+BaseDir='/mnt/8811f502-ae19-4dd8-8371-f1915178f581/Fernando'
 # 
 #BaseDir='/media/fernando/B0EA304AEA300EDA/Dados/Fernando'
 
@@ -48,7 +48,7 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/training_va
 
 ipynb-py-convert training_holdout_onlycls.ipynb training_holdout_onlycls.py
 
-for ncod in 15 18 20 22 25 29 33 37 41 45 49 53; do
+for ncod in 15 18 20 22 25 29 33 37 41 45 49 53 57 61 65 69; do
     echo " "
     python3 training_holdout_onlycls.py --epochs  10000 \
                                         --patience 2000 \
