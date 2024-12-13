@@ -23,7 +23,7 @@ def load_model_from_intern(model,model_fname):
             
         except Exception:
             print("Error loading the weights in:",path_of_model);
-            sys.sys.exit();
+            sys.exit();
     else:
         print("Error loading, file no found:",path_of_model);
         sys.exit();
