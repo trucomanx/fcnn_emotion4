@@ -23,10 +23,10 @@ def load_model_from_intern(model,model_fname):
             
         except Exception:
             print("Error loading the weights in:",path_of_model);
-            exit();
+            sys.sys.exit();
     else:
         print("Error loading, file no found:",path_of_model);
-        exit();
+        sys.exit();
     return model;
 
 def load_model_from_extern(model,file_of_weight):
@@ -39,10 +39,10 @@ def load_model_from_extern(model,file_of_weight):
             print("Loaded the weights in:",file_of_weight);
         except Exception:
             print("Error loading the weights in:",file_of_weight);
-            exit();
+            sys.exit();
     else:
         print("Error loading, file no found:",file_of_weight);
-        exit();
+        sys.exit();
     
     return model;
 
