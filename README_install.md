@@ -6,6 +6,11 @@ Download the source code
     
     git clone https://github.com/trucomanx/fcnn_emotion4
 
+Download the models from fcnn_emotion4/ber2024-body
+
+    gdown 10UtJHW0pETBKW6ptEZ1zzDVodwfwhZ8m
+    unzip models_v2.zip -d fcnn_emotion4/library/SkeletonEmotion4Lib/models
+    
 The next command generates the `dist/SkeletonEmotion4Lib-VERSION.tar.gz` file.
 
     cd fcnn_emotion4/library
