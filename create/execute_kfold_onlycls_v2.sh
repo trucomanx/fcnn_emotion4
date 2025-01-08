@@ -33,7 +33,8 @@ image_ext=".eps";
 '
 
 # HD
-BaseDir='/media/maquina02/HD/Dados/Fernando'
+#BaseDir='/media/maquina02/HD/Dados/Fernando'
+BaseDir='/media/fernando/Expansion'
 # 
 #BaseDir='/media/fernando/B0EA304AEA300EDA/Dados/Fernando'
 
@@ -58,7 +59,7 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/cross-valid
 ipynb-py-convert kfold_validation_onlycls.ipynb kfold_validation_onlycls.py
 
 # 11 15 18 20 22 25 29 33 37 41 45 49 53
-for ncod in 11 15 18 20 22 25 29 33 37 41 45 49 53; do
+for ncod in 57 ; do
     echo " "
     python3 kfold_validation_onlycls.py --epochs  10000 \
                                         --patience 2000 \
