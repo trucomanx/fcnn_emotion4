@@ -19,7 +19,7 @@ Since the code uses an old version of keras, it needs to be placed at the beginn
     print(res);
 
 
-# Installation summary
+# Installation summary - Dataset BER2024
 
     git clone https://github.com/trucomanx/fcnn_emotion4
     gdown 10UtJHW0pETBKW6ptEZ1zzDVodwfwhZ8m
@@ -29,4 +29,11 @@ Since the code uses an old version of keras, it needs to be placed at the beginn
     pip3 install dist/SkeletonEmotion4Lib-*.tar.gz
 
 
+# Installation summary - Dataset FULL2024
 
+    git clone https://github.com/trucomanx/fcnn_emotion4
+    gdown 10UtJHW0pETBKW6ptEZ1zzDVodwfwhZ8m
+    unzip models_v2.zip -d fcnn_emotion4/library/SkeletonEmotion4Lib/models
+    cd fcnn_emotion4/library
+    python3 setup.py sdist
+    pip3 install dist/SkeletonEmotion4Lib-*.tar.gz
