@@ -15,6 +15,7 @@ class DataAugmentationEncDecGenerator(tf.keras.utils.Sequence):
         self.augment_fn = augment_fn
         self.shuffle = shuffle
         self.indices = np.arange(len(self.data))
+        self.samples = len(self.data)
 
     def __len__(self):
         return int(np.ceil(len(self.data) / self.batch_size))
@@ -51,6 +52,7 @@ class DataAugmentationClsGenerator(tf.keras.utils.Sequence):
         self.augment_fn = augment_fn
         self.shuffle = shuffle
         self.indices = np.arange(len(self.data))
+        self.samples = len(self.data)
         
         # One-hot encode the labels
         self.label_binarizer = LabelBinarizer()
