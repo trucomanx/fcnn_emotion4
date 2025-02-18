@@ -2,7 +2,7 @@
 
 PyCommand='#!/usr/bin/python3
 
-json_filename="training_data_results.json"
+json_filename="testing_data_results.json"
 
 model_list=["onlycls_ncod15",
             "onlycls_ncod18",
