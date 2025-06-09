@@ -10,7 +10,7 @@ Since the code uses an old version of keras, it needs to be placed at the beginn
     import SkeletonEmotion4Lib.Classifier as sec
     import numpy as np
     
-    cls=sec.Emotion4Classifier();
+    cls=sec.Emotion4Classifier(ncod=81);
     
     vec=np.random.randn(51);
     
