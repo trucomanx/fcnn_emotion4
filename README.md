@@ -12,7 +12,7 @@ Since the code uses an old version of keras, it needs to be placed at the beginn
     
     cls=sec.Emotion4Classifier(ncod=81);
     
-    vec=np.random.randn(51);
+    vec=np.random.randn(51); # 17 keypoints x 3
     
     res=cls.predict_vec(vec);
     
