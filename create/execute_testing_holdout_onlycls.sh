@@ -23,18 +23,23 @@ image_ext=".eps";
 '
 
 # HD
-#BaseDir='/media/fernando/Expansion'
-BaseDir='/mnt/8811f502-ae19-4dd8-8371-f1915178f581/Fernando'
+BaseDir='/media/shannon/Expansion'
+#BaseDir='/mnt/8811f502-ae19-4dd8-8371-f1915178f581/Fernando'
 #BaseDir='/media/fernando/B0EA304AEA300EDA/Dados/Fernando'
 
 OutDir=$BaseDir'/OUTPUTS/DOCTORADO2/fcnn_emotion4_1_10times'
 
 DName='ber2024-skel'
 
+## Antes de reordenar por face
+#InTsD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
+#InTsF='test.csv'
+#ModD=$BaseDir'/OUTPUTS/DOCTORADO2/SKEL/fcnn_emotion4/ber2024-skel/training_validation_holdout'
 
+## Despues de reordenar por face
 InTsD=$BaseDir'/DATASET/TESE/BER/BER2024/BER2024-SKELETON'
-InTsF='test.csv'
-ModD=$BaseDir'/OUTPUTS/DOCTORADO2/SKEL/fcnn_emotion4/ber2024-skel/training_validation_holdout'
+InTsF='test_refface.csv'
+ModD=$BaseDir'/OUTPUTS/DOCTORADO2/SKEL/fcnn_emotion4_v2/ber2024-skel/training_validation_holdout'
 
 ################################################################################
 
@@ -45,7 +50,7 @@ echo "$PyCommand" | cat - 'main.py' > temp && mv temp $OutDir/$DName/testing_hol
 
 ipynb-py-convert testing_holdout_onlycls.ipynb testing_holdout_onlycls.py
 
-for ncod in 15 18 20 22 25; do
+for ncod in 15 18 20 22 25 29 33 37 41 45 49 53 57; do #15 18 20 22 25
     echo " "
     python3 testing_holdout_onlycls.py  --ncod $ncod \
                                         --model-file $ModD/'onlycls_ncod'$ncod/'model_onlycls_ncod'$ncod'.h5' \

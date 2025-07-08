@@ -4,5 +4,8 @@ pandas
 ipynb-py-convert
 scikit-learn
 matplotlib
+opencv-python
 tensorflow
+tf-keras
+pytictoc
 
